@@ -3,6 +3,7 @@ package ru.bmstu.hadoop;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import scala.Tuple2;
 
 public class JoinJob {
     public static void main(String[] args) {
@@ -12,6 +13,6 @@ public class JoinJob {
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
         int column = 0;
-        JavaRDD<String, String> airports = totalFile.mapToPair(s -> )
+        JavaRDD<String> airports = totalFile.mapToPair(s -> new Tuple2<>(s, column++));
     }
 }
