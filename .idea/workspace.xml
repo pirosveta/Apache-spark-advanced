@@ -23,6 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00a41732-6e62-47d1-91e5-4571fd51c4f8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/CellOfTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CellOfTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -81,7 +82,7 @@
       <option name="presentableId" value="Default" />
       <updated>1604077735935</updated>
       <workItem from="1604077741818" duration="1153000" />
-      <workItem from="1604079707183" duration="1359000" />
+      <workItem from="1604079707183" duration="1675000" />
     </task>
     <servers />
   </component>

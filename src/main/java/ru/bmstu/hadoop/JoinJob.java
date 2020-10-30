@@ -12,7 +12,5 @@ public class JoinJob {
         JavaRDD<String> totalFile = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
-        int column = 0;
-        JavaRDD<String> airports = totalFile.mapToPair(s -> new Tuple2<>(column++, s));
     }
 }
