@@ -5,5 +5,7 @@ import scala.Serializable;
 public class ParsedData implements Serializable {
     private int row, column;
 
-    public 
+    public ParsedData(int column){
+        
+    };
 }
