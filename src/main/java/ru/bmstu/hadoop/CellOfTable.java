@@ -1,4 +1,7 @@
 package ru.bmstu.hadoop;
 
-public class CellOfTable {
+import scala.Serializable;
+
+public class CellOfTable implements Serializable {
+    
 }
