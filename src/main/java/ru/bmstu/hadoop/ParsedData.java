@@ -2,6 +2,6 @@ package ru.bmstu.hadoop;
 
 import scala.Serializable;
 
-public class CellOfTable implements Serializable {
+public class ParsedData implements Serializable {
     
 }
