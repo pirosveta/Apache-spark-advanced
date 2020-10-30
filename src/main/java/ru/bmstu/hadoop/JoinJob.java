@@ -8,4 +8,5 @@ public class JoinJob {
     SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
     JavaSparkContext sc = new JavaSparkContext(conf);
     JavaRDD<String> TotalInformation = sc.textFile("664600583_T_ONTIME_sample.csv");
+    
 }
