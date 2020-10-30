@@ -11,4 +11,16 @@ public class ParsedData implements Serializable {
         this.row = row;
         this.column = column;
     };
+
+    public String getValue() {
+        return value;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
+    }
 }
