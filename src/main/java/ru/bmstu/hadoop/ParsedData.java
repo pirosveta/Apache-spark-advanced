@@ -4,9 +4,11 @@ import scala.Serializable;
 
 public class ParsedData implements Serializable {
     private String value;
-    private int column;
+    private int row, column;
 
-    public ParsedData(String value, int column){
-        
+    public ParsedData(String value, int row, int column){
+        this.value = value;
+        this.row = row;
+        this.column = column;
     };
 }
