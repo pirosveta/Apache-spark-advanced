@@ -17,9 +17,9 @@ public class JoinJob {
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
-        JavaPairRDD<Tuple2<String, String>, TotalStatistics> finalData =
-                orderedTotalData.combineByKey(TotalStatistics::new,
-                        TotalStatistics::updateStatistics,
-                        TotalStatistics::update);
+        JavaPairRDD<Tuple2<String, String>, TotalStatistics> finalData = orderedTotalData.combineByKey(
+                TotalStatistics::new,
+                TotalStatistics::updateStatistics,
+                TotalStatistics::update);
     }
 }
