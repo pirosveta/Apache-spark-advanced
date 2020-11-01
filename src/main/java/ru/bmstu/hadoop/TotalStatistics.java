@@ -54,13 +54,13 @@ public class TotalStatistics {
         return total;
     }
 
-    public TotalStatistics update(TotalStatistics firstTotal, TotalStatistics secondTotal) {
-        if (firstTotal.getMaxDelay() < secondTotal.getMaxDelay()) {
-            firstTotal.setMaxDelay(secondTotal.getMaxDelay());
+    public TotalStatistics update(TotalStatistics first, TotalStatistics second) {
+        if (first.getMaxDelay() < second.getMaxDelay()) {
+            first.setMaxDelay(second.getMaxDelay());
         }
-        firstTotal.addTotalFlights(secondTotal.getTotalFlights());
-        firstTotal.addTotalDelayedCancelledFlights(secondTotal.getTotalDelayedCancelledFlights());
-        firstTotal.setPercentDelayedCancelledFlights();
-        return firstTotal;
+        first.addTotalFlights(second.getTotalFlights());
+        first.addTotalDelayedCancelledFlights(second.getTotalDelayedCancelledFlights());
+        first.setPercentDelayedCancelledFlights();
+        return first;
     }
 }
