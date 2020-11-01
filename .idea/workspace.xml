@@ -68,6 +68,7 @@
       <updated>1604077735935</updated>
       <workItem from="1604077741818" duration="1153000" />
       <workItem from="1604079707183" duration="2706000" />
+      <workItem from="1604220267125" duration="188000" />
     </task>
     <servers />
   </component>
@@ -85,5 +86,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="640" y="209" width="630" height="546" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1604220307770">
+      <screen x="0" y="0" width="1920" height="964" />
+    </state>
+    <state x="640" y="209" width="630" height="546" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.964@0.0.1920.964" timestamp="1604220307770" />
   </component>
 </project>
