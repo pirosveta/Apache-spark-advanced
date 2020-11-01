@@ -10,4 +10,6 @@ public class TotalStatistics {
             totalDelayedCancelledFlights++;
         }
     }
+
+    public void updateStatistics(TotalStatistics statistics, )
 }
