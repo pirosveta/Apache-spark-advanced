@@ -26,6 +26,10 @@ public class TotalStatistics {
         return totalFlights;
     }
 
+    public double getPercentDelayedCancelledFlights() {
+        return percentDelayedCancelledFlights;
+    }
+
     public void setMaxDelay(int maxDelay) {
         this.maxDelay = maxDelay;
     }

@@ -17,7 +17,7 @@ public class JoinJob {
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).
-                filter(s -> s.getCancelled() != "CANCELLED");
+                filter(s -> !s.getCancelled().equals("CANCELLED"));
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
@@ -27,11 +27,13 @@ public class JoinJob {
                 TotalStatistics::update);
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).
-                filter(s -> s.getAirportName() != "Description");
+                filter(s -> !s.getAirportName().equals("Description"));
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
 
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
-        JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2, ))
+        JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2,
+                airportsBroadcasted.value().get(s._1._1), airportsBroadcasted.value().get(s._1._2)));
+        airportStatistics.saveAsTextFile("result");
     }
 }
