@@ -18,39 +18,47 @@ public class TotalStatistics {
         return maxDelay;
     }
 
+    public int getTotalDelayedCancelledFlights() {
+        return totalDelayedCancelledFlights;
+    }
+
+    public int getTotalFlights() {
+        return totalFlights;
+    }
+
     public void setMaxDelay(int maxDelay) {
         this.maxDelay = maxDelay;
     }
 
-    public void setPercentDelayedCancelledFlights(int percentDelayedCancelledFlights) {
-        this.percentDelayedCancelledFlights = percentDelayedCancelledFlights;
+    public void setPercentDelayedCancelledFlights() {
+        this.percentDelayedCancelledFlights = (double) this.totalFlights * 100 / this.totalDelayedCancelledFlights;
     }
 
-    public void incTotalDelayedCancelledFlights() {
-        this.totalDelayedCancelledFlights++;
+    public void addTotalDelayedCancelledFlights(int totalDelayedCancelledFlights) {
+        this.totalDelayedCancelledFlights += totalDelayedCancelledFlights;
     }
 
-    public void incTotalFlights() {
-        this.totalFlights++;
+    public void addTotalFlights(int totalFlights) {
+        this.totalFlights += totalFlights;
     }
 
-    public void updateStatistics(TotalStatistics total, SingleStatistics single) {
+    public TotalStatistics updateStatistics(TotalStatistics total, SingleStatistics single) {
         if (total.getMaxDelay() < single.getDelay()) {
             total.setMaxDelay(single.getDelay());
         }
-        total.incTotalFlights();
+        total.addTotalFlights(1);
         if (single.getDelay() > 0 || single.getCancelled() == 1) {
-            total.incTotalDelayedCancelledFlights();
+            total.addTotalDelayedCancelledFlights(1);
         }
+        total.setPercentDelayedCancelledFlights();
+        return total;
     }
 
     public void update(TotalStatistics firstTotal, TotalStatistics secondTotal) {
         if (firstTotal.getMaxDelay() < secondTotal.getMaxDelay()) {
-            firstTotal.setMaxDelay(secondTotal.getDelay());
+            firstTotal.setMaxDelay(secondTotal.getMaxDelay());
         }
-        total.incTotalFlights();
-        if (single.getDelay() > 0 || single.getCancelled() == 1) {
-            total.incTotalDelayedCancelledFlights();
-        }
+        firstTotal.addTotalFlights(secondTotal.getTotalFlights());
+        firstTotal.addTotalDelayedCancelledFlights(secondTotal.getTotalDelayedCancelledFlights());
     }
 }
