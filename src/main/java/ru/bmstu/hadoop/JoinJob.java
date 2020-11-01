@@ -19,7 +19,7 @@ public class JoinJob {
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
         JavaPairRDD<Tuple2<String, String>, TotalStatistics> finalData =
                 orderedTotalData.combineByKey(TotalStatistics::new,
-                        (totalStatistics, s) -> TotalStatistics.updateStatistics(s),
+                        TotalStatistics::updateStatistics,
                         TotalStatistics::update);
     }
 }
