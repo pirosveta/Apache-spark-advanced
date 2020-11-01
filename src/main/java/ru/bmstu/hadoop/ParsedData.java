@@ -3,13 +3,10 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class ParsedData implements Serializable {
-    private String value;
-    private int row, column;
+    private String ;
 
-    public ParsedData(String value, int row, int column){
-        this.value = value;
-        this.row = row;
-        this.column = column;
+    public ParsedData(String[] data){
+
     };
 
     public String getValue() {
