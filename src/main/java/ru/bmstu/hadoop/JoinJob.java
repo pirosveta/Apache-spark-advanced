@@ -9,8 +9,9 @@ public class JoinJob {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> totalInformation = sc.textFile("664600583_T_ONTIME_sample.csv");
+        JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
-        JavaRDD<ParsedData> parsedTotalInformation = totalInformation.map(s -> new ParsedData(s.split(",")));
+        JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
+        JavaRDD<> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
     }
 }
