@@ -6,6 +6,8 @@ import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 import scala.Tuple2;
 
+import java.util.Map;
+
 public class JoinJob {
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
@@ -17,9 +19,10 @@ public class JoinJob {
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
-        JavaPairRDD<Tuple2<String, String>, TotalStatistics> finalData = orderedTotalData.combineByKey(
+        Map<Tuple2<String, String>, TotalStatistics> finalData = orderedTotalData.combineByKey(
                 TotalStatistics::new,
                 TotalStatistics::updateStatistics,
-                TotalStatistics::update);
+                TotalStatistics::update).collectAsMap();
+        
     }
 }
