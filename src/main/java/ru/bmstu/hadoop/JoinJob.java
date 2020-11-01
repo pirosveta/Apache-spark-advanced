@@ -12,6 +12,6 @@ public class JoinJob {
         JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
-        JavaRDD<> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
+        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
     }
 }
