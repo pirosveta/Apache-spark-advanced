@@ -13,11 +13,7 @@ public class JoinJob {
         JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
-        int row = 0;
         JavaPairRDD<String, Integer> pairTotalData = totalData.mapToPair(s -> new Tuple2<>(s, 1));
-        JavaPairRDD<String, Integer> pairAirportNames = airportNames.mapToPair(s -> new Tuple2<>(s, 1));
-
-        JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
-        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
+        JavaRDD<ParsedData> parsedTotalData = pairTotalData.map(s -> new ParsedData(s.split(",")));
     }
 }
