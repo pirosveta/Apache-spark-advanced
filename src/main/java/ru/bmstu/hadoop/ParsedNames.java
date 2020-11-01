@@ -1,6 +1,8 @@
 package ru.bmstu.hadoop;
 
-public class ParsedNames {
+import scala.Serializable;
+
+public class ParsedNames implements Serializable {
     private String airportID, airportName;
 
     public ParsedNames(String[] data) {
