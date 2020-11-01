@@ -5,8 +5,9 @@ public class SingleStatistics {
 
     public SingleStatistics(String delay, String cancelled) {
         try {
-            this.delay = Integer.parseInt(delay);
             this.cancelled = Integer.parseInt(cancelled);
+            if (this.cancelled == 0) this.delay = Integer.parseInt(delay);
+            else this.delay = 0;
         }
         catch (NumberFormatException e) {
             System.out.println(e);
