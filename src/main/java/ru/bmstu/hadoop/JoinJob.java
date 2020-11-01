@@ -4,6 +4,7 @@ import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.broadcast.Broadcast;
 import scala.Tuple2;
 
 import java.util.Map;
@@ -19,10 +20,12 @@ public class JoinJob {
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
-        Map<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
+        JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
                 TotalStatistics::new,
                 TotalStatistics::updateStatistics,
-                TotalStatistics::update).collectAsMap();
-        final Broadcast<Map<String, AirportData>> airportsBroadcasted = sc.broadcast(airportNames);
+                TotalStatistics::update);
+
+        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).filter(s -> s.getName != )
+        final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNames);
     }
 }
