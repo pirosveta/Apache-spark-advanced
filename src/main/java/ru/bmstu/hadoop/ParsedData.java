@@ -6,8 +6,8 @@ public class ParsedData implements Serializable {
     private String originAirportID, destAirportID, delay, cancelled;
 
     public ParsedData(String[] data){
-        originAirportID = data[];
-        destAirportID = data[];
+        originAirportID = data[11];
+        destAirportID = data[14];
         delay = data[];
         cancelled = data[];
     };
