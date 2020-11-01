@@ -31,6 +31,6 @@ public class JoinJob {
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
-        
+        JavaPairRDD<>
     }
 }
