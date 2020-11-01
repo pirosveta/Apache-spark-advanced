@@ -8,8 +8,8 @@ public class ParsedData implements Serializable {
     public ParsedData(String[] data){
         originAirportID = data[11];
         destAirportID = data[14];
-        delay = data[];
-        cancelled = data[];
+        delay = data[18];
+        cancelled = data[19];
     };
 
     public String getValue() {
