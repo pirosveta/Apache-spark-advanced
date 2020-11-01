@@ -42,7 +42,7 @@ public class TotalStatistics {
         this.totalFlights += totalFlights;
     }
 
-    public TotalStatistics updateStatistics(TotalStatistics total, SingleStatistics single) {
+    public static TotalStatistics updateStatistics(TotalStatistics total, SingleStatistics single) {
         if (total.getMaxDelay() < single.getDelay()) {
             total.setMaxDelay(single.getDelay());
         }
@@ -54,7 +54,7 @@ public class TotalStatistics {
         return total;
     }
 
-    public TotalStatistics update(TotalStatistics first, TotalStatistics second) {
+    public static TotalStatistics update(TotalStatistics first, TotalStatistics second) {
         if (first.getMaxDelay() < second.getMaxDelay()) {
             first.setMaxDelay(second.getMaxDelay());
         }
