@@ -11,7 +11,7 @@ public class TotalStatistics {
             totalDelayedCancelledFlights = 1;
         }
         else totalDelayedCancelledFlights = 0;
-        percentDelayedCancelledFlights = (double) totalFlights * 100 / totalDelayedCancelledFlights;
+        this.setPercentDelayedCancelledFlights();
     }
 
     public int getMaxDelay() {
@@ -54,11 +54,13 @@ public class TotalStatistics {
         return total;
     }
 
-    public void update(TotalStatistics firstTotal, TotalStatistics secondTotal) {
+    public TotalStatistics update(TotalStatistics firstTotal, TotalStatistics secondTotal) {
         if (firstTotal.getMaxDelay() < secondTotal.getMaxDelay()) {
             firstTotal.setMaxDelay(secondTotal.getMaxDelay());
         }
         firstTotal.addTotalFlights(secondTotal.getTotalFlights());
         firstTotal.addTotalDelayedCancelledFlights(secondTotal.getTotalDelayedCancelledFlights());
+        firstTotal.setPercentDelayedCancelledFlights();
+        return firstTotal;
     }
 }
