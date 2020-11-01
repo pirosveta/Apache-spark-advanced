@@ -19,7 +19,7 @@ public class ParsedData implements Serializable {
     public String getDelay() {
         return delay;
     }
-    
+
     public String getDestAirportID() {
         return destAirportID;
     }
