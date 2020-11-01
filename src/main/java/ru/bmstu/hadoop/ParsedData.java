@@ -12,15 +12,19 @@ public class ParsedData implements Serializable {
         cancelled = data[19];
     };
 
-    public String getValue() {
-        return value;
+    public String getCancelled() {
+        return cancelled;
     }
 
-    public int getRow() {
-        return row;
+    public String getDelay() {
+        return delay;
+    }
+    
+    public String getDestAirportID() {
+        return destAirportID;
     }
 
-    public int getColumn() {
-        return column;
+    public String getOriginAirportID() {
+        return originAirportID;
     }
 }
