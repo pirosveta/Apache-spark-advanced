@@ -22,7 +22,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00a41732-6e62-47d1-91e5-4571fd51c4f8" name="Default Changelist" comment="" />
+    <list default="true" id="00a41732-6e62-47d1-91e5-4571fd51c4f8" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -79,7 +81,7 @@
       <workItem from="1604077741818" duration="1153000" />
       <workItem from="1604079707183" duration="2706000" />
       <workItem from="1604220267125" duration="188000" />
-      <workItem from="1604220661069" duration="5215000" />
+      <workItem from="1604220661069" duration="5644000" />
     </task>
     <servers />
   </component>
@@ -103,5 +105,9 @@
       <screen x="0" y="0" width="1920" height="964" />
     </state>
     <state x="640" y="209" width="630" height="546" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1920.964@0.0.1920.964" timestamp="1604220307770" />
+    <state x="627" y="172" width="655" height="620" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1604225958663">
+      <screen x="0" y="0" width="1920" height="964" />
+    </state>
+    <state x="627" y="172" width="655" height="620" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.964@0.0.1920.964" timestamp="1604225958663" />
   </component>
 </project>
