@@ -15,7 +15,7 @@ public class JoinJob {
 
         int row = 0;
         JavaPairRDD<String, Integer> pairTotalData = totalData.mapToPair(s -> new Tuple2<>(s, 1));
-        JavaPairRDD<String, Integer> pairAirportNames = airportNames.mapToPair();
+        JavaPairRDD<String, Integer> pairAirportNames = airportNames.mapToPair(s -> new Tuple2<>(s, 1));
 
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
