@@ -25,7 +25,7 @@ public class JoinJob {
                 TotalStatistics::updateStatistics,
                 TotalStatistics::update);
 
-        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).filter(s -> s.getName != "Description");
+        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).filter(s -> s.getName() != "Description");
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNames);
     }
 }
