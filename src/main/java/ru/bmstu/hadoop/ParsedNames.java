@@ -10,7 +10,11 @@ public class ParsedNames implements Serializable {
         airportName = data[1];
     }
 
-    public String getName() {
+    public String getAirportName() {
+        return airportName;
+    }
+
+    public String getAirportID() {
         return airportName;
     }
 }
