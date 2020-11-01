@@ -34,6 +34,6 @@ public class JoinJob {
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
         JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2,
                 airportsBroadcasted.value().get(s._1._1), airportsBroadcasted.value().get(s._1._2)));
-        airportStatistics.saveAsTextFile("result");
+        airportStatistics.saveAsTextFile("output");
     }
 }
