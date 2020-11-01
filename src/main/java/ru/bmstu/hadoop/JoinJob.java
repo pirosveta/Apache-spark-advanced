@@ -30,7 +30,8 @@ public class JoinJob {
                 filter(s -> s.getAirportName() != "Description");
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
+
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
-        JavaPairRDD<FinalAirportStatistics>
+        JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2, ))
     }
 }
