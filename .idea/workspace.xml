@@ -22,11 +22,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00a41732-6e62-47d1-91e5-4571fd51c4f8" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/JoinJob.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/Statistics.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ru/bmstu/hadoop/Statistics.java" afterDir="false" />
-    </list>
+    <list default="true" id="00a41732-6e62-47d1-91e5-4571fd51c4f8" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -71,7 +67,7 @@
       <workItem from="1604079707183" duration="2706000" />
       <workItem from="1604220267125" duration="188000" />
       <workItem from="1604220661069" duration="6681000" />
-      <workItem from="1604239408667" duration="1946000" />
+      <workItem from="1604239408667" duration="2333000" />
     </task>
     <servers />
   </component>
