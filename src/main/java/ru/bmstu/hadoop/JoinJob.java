@@ -12,7 +12,7 @@ public class JoinJob {
         JavaSparkContext sc = new JavaSparkContext(conf);
         JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
-        JavaPairRDD<String, Integer> = totalData.
+        JavaPairRDD<String, Integer> = totalData.mapToPair()
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",")));
     }
