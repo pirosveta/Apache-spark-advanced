@@ -13,10 +13,10 @@ public class JoinJob {
         JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
-        JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(",")));
-        JavaPairRDD<Tuple2<String, String>, Statistics> pairTotalData = parsedTotalData.mapToPair(s ->
+        JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).filter(s -> s.getCancelled() != "CANCELLED");
+        JavaPairRDD<Tuple2<String, String>, SingleStatistics> pairTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
-                new Statistics(s.getDelay(), s.getCancelled())));
+                new SingleStatistics(s.getDelay(), s.getCancelled())));
 
     }
 }
