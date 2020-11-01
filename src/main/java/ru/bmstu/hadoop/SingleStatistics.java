@@ -13,4 +13,12 @@ public class SingleStatistics {
             System.out.println(e);
         }
     }
+
+    public int getCancelled() {
+        return cancelled;
+    }
+
+    public int getDelay() {
+        return delay;
+    }
 }

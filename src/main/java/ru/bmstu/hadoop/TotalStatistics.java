@@ -1,15 +1,46 @@
 package ru.bmstu.hadoop;
 
 public class TotalStatistics {
-    private int maxDelay, totalDelayedCancelledFlights = 0, totalFlights = 0, percentDelayedCancelledFlights;
+    private int maxDelay, totalDelayedCancelledFlights, totalFlights;
+    private double percentDelayedCancelledFlights = 0;
 
-    public TotalStatistics(int delay, int cancelled) {
-        maxDelay = delay;
-        totalFlights++;
-        if (delay > 0 || cancelled == 1) {
-            totalDelayedCancelledFlights++;
+    public TotalStatistics(SingleStatistics single) {
+        maxDelay = single.getDelay();
+        totalFlights = 1;
+        if (single.getDelay() > 0 || single.getCancelled() == 1) {
+            totalDelayedCancelledFlights = 1;
         }
+        else totalDelayedCancelledFlights = 0;
+        percentDelayedCancelledFlights = (double) totalFlights * 100 / totalDelayedCancelledFlights;
     }
 
-    public void updateStatistics(TotalStatistics statistics, )
+    public int getMaxDelay() {
+        return maxDelay;
+    }
+
+    public void setMaxDelay(int maxDelay) {
+        this.maxDelay = maxDelay;
+    }
+
+    public void setPercentDelayedCancelledFlights(int percentDelayedCancelledFlights) {
+        this.percentDelayedCancelledFlights = percentDelayedCancelledFlights;
+    }
+
+    public void incTotalDelayedCancelledFlights() {
+        this.totalDelayedCancelledFlights++;
+    }
+
+    public void incTotalFlights() {
+        this.totalFlights++;
+    }
+
+    public void updateStatistics(TotalStatistics total, SingleStatistics single) {
+        if (total.getMaxDelay() < single.getDelay()) {
+            total.setMaxDelay(single.getDelay());
+        }
+        total.incTotalFlights();
+        if (single.getDelay() > 0 || single.getCancelled() == 1) {
+            total.incTotalDelayedCancelledFlights();
+        }
+    }
 }
