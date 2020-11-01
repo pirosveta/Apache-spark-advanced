@@ -43,4 +43,14 @@ public class TotalStatistics {
             total.incTotalDelayedCancelledFlights();
         }
     }
+
+    public void update(TotalStatistics firstTotal, TotalStatistics secondTotal) {
+        if (firstTotal.getMaxDelay() < secondTotal.getMaxDelay()) {
+            firstTotal.setMaxDelay(secondTotal.getDelay());
+        }
+        total.incTotalFlights();
+        if (single.getDelay() > 0 || single.getCancelled() == 1) {
+            total.incTotalDelayedCancelledFlights();
+        }
+    }
 }
