@@ -10,7 +10,9 @@ import scala.Tuple2;
 import java.util.Map;
 
 public class JoinJob {
-    private static final String DELIMITER = ",", FIRST_ROW_TOTAL_DATA = "\"CANCELLED\"", FIRST_ROW_AIRPORT_NAMES = "Description";
+    private static final String DELIMITER = ",", FIRST_ROW_TOTAL_DATA = "\"CANCELLED\"",
+            FIRST_ROW_AIRPORT_NAMES = "Description";
+    private static final int NUMBER_OF_ARRAYS = 2;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
@@ -28,7 +30,7 @@ public class JoinJob {
                 TotalStatistics::updateStatistics,
                 TotalStatistics::update);
 
-        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(DELIMITER, 2))).
+        JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(DELIMITER, NUMBER_OF_ARRAYS))).
                 filter(s -> !s.getAirportName().equals(FIRST_ROW_AIRPORT_NAMES));
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
