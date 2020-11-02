@@ -1,6 +1,8 @@
 package ru.bmstu.hadoop;
 
-public class TotalStatistics {
+import scala.Serializable;
+
+public class TotalStatistics implements Serializable {
     private int maxDelay, totalDelayedCancelledFlights, totalFlights;
     private double percentDelayedCancelledFlights = 0;
 

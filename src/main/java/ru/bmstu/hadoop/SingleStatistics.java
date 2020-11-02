@@ -1,6 +1,8 @@
 package ru.bmstu.hadoop;
 
-public class SingleStatistics {
+import scala.Serializable;
+
+public class SingleStatistics implements Serializable {
     private int delay, cancelled;
 
     public SingleStatistics(String delay, String cancelled) {
