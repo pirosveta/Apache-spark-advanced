@@ -10,6 +10,8 @@ import scala.Tuple2;
 import java.util.Map;
 
 public class JoinJob {
+    private static final String FIRST_ROW_TOTAL_DATA = "\"CANCELLED\"", FIRST_ROW_AIRPORT_NAMES = "Description";
+
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
         JavaSparkContext sc = new JavaSparkContext(conf);
@@ -17,7 +19,7 @@ public class JoinJob {
         JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
 
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).
-                filter(s -> !s.getCancelled().equals("\"CANCELLED\""));
+                filter(s -> !s.getCancelled().equals(FIRST_ROW_TOTAL_DATA));
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
@@ -27,7 +29,7 @@ public class JoinJob {
                 TotalStatistics::update);
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).
-                filter(s -> !s.getAirportName().equals("Description"));
+                filter(s -> !s.getAirportName().equals(FIRST_ROW_AIRPORT_NAMES));
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
 
