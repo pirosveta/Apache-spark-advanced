@@ -18,31 +18,13 @@ public class JoinJob {
 
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).
                 filter(s -> !s.getCancelled().equals("\"CANCELLED\""));
-
-        System.out.println("--------ParsedData--------\n");
-        parsedTotalData.take(10).forEach(s -> System.out.println(s.getOriginAirportID() + " " + s.getDestAirportID() + " " +
-                s.getDelay() + " " + s.getCancelled()));
-        System.out.println("------------------------\n");
-
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
-
-        System.out.println("--------SingleStatistics--------\n");
-        orderedTotalData.take(10).forEach(s -> System.out.println(s._1._1 + " " + s._1._2 + " " +
-                s._2.getDelay() + " " + s._2.getCancelled()));
-        System.out.println("------------------------\n");
-
         JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
                 TotalStatistics::new,
                 TotalStatistics::updateStatistics,
                 TotalStatistics::update);
-
-        System.out.println("--------TotalStatistics--------\n");
-        airportData.take(10).forEach(s -> System.out.println(s._2.getMaxDelay() + " " + s._2.getTotalFlights() + " " +
-                s._2.getTotalDelayedCancelledFlights() + " " + s._2.getPercentDelayedCancelledFlights()));
-        System.out.println("------------------------\n");
-
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).
                 filter(s -> !s.getAirportName().equals("Description"));
