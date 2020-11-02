@@ -10,6 +10,8 @@ public class ParsedData implements Serializable {
         destAirportID = data[14];
         delay = data[18];
         cancelled = data[19];
+
+        System.out.println("OriginID: " + originAirportID + "; DestID: " + destAirportID);
     };
 
     public String getCancelled() {

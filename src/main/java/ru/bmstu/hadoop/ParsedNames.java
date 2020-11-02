@@ -8,6 +8,7 @@ public class ParsedNames implements Serializable {
     public ParsedNames(String[] data) {
         airportID = data[0].replaceAll("\"", "");
         airportName = data[1];
+        System.out.println("ID: " + airportID + "; Name: " + airportName);
     }
 
     public String getAirportName() {
