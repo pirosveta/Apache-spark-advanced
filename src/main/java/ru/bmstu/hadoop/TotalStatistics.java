@@ -40,12 +40,12 @@ public class TotalStatistics implements Serializable {
         this.percentDelayedCancelledFlights = (double) this.totalDelayedCancelledFlights * 100 / this.totalFlights;
     }
 
-    public void addTotalDelayedCancelledFlights(int totalDelayedCancelledFlights) {
-        this.totalDelayedCancelledFlights += totalDelayedCancelledFlights;
+    public void addTotalDelayedCancelledFlights(int addition) {
+        this.totalDelayedCancelledFlights += addition;
     }
 
-    public void addTotalFlights(int totalFlights) {
-        this.totalFlights += totalFlights;
+    public void addTotalFlights(int addition) {
+        this.totalFlights += addition;
     }
 
     public static TotalStatistics updateStatistics(TotalStatistics total, SingleStatistics single) {
