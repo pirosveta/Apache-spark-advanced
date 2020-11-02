@@ -20,13 +20,12 @@ public class FinalAirportStatistics implements Serializable {
 
     @Override
     public String toString() {
-        return "FinalAirportStatistics{" +
-                "originAirportID='" + originAirportID + '\'' +
-                ", originAirportName='" + originAirportName + '\'' +
-                ", destAirportID='" + destAirportID + '\'' +
-                ", destAirportName='" + destAirportName + '\'' +
-                ", maxDelay=" + maxDelay +
-                ", percentDelayedAndCancelledFlights=" + percentDelayedAndCancelledFlights +
-                '}';
+        return originAirportID + ' ' +
+                originAirportName + ' ' +
+                "- " + destAirportID + ' ' +
+                destAirportName + ' ' +
+                ": maxDelay = " + maxDelay +
+                "; percentDelayedAndCancelledFlights = " + percentDelayedAndCancelledFlights +
+                ';';
     }
 }
