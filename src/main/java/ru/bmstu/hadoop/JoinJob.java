@@ -20,7 +20,7 @@ public class JoinJob {
                 filter(s -> !s.getCancelled().equals("\"CANCELLED\""));
 
         System.out.println("--------ParsedData--------\n");
-        parsedTotalData.take(5).forEach(s -> System.out.println(s.getOriginAirportID() + " " + s.getDestAirportID() + " " +
+        parsedTotalData.take(10).forEach(s -> System.out.println(s.getOriginAirportID() + " " + s.getDestAirportID() + " " +
                 s.getDelay() + " " + s.getCancelled()));
         System.out.println("------------------------\n");
 
@@ -29,7 +29,7 @@ public class JoinJob {
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
 
         System.out.println("--------SingleStatistics--------\n");
-        orderedTotalData.take(5).forEach(s -> System.out.println(s._2.getDelay() + " " + s._2.getCancelled()));
+        orderedTotalData.take(10).forEach(s -> System.out.println(s._2.getDelay() + " " + s._2.getCancelled()));
         System.out.println("------------------------\n");
 
         JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
@@ -38,7 +38,7 @@ public class JoinJob {
                 TotalStatistics::update);
 
         System.out.println("--------TotalStatistics--------\n");
-        airportData.take(5).forEach(s -> System.out.println(s._2.getMaxDelay() + " " + s._2.getTotalFlights() + " " +
+        airportData.take(10).forEach(s -> System.out.println(s._2.getMaxDelay() + " " + s._2.getTotalFlights() + " " +
                 s._2.getTotalDelayedCancelledFlights() + " " + s._2.getPercentDelayedCancelledFlights()));
         System.out.println("------------------------\n");
 
@@ -47,10 +47,6 @@ public class JoinJob {
                 filter(s -> !s.getAirportName().equals("Description"));
         Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
-
-        System.out.println("--------Airports--------\n");
-        parsedAirportNames.take(5).forEach(s -> System.out.println(s.getAirportID() + " " + s.getAirportName()));
-        System.out.println("------------------------\n");
 
         final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
         JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2,
