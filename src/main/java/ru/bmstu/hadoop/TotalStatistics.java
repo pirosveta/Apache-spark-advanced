@@ -32,19 +32,19 @@ public class TotalStatistics implements Serializable {
         return percentDelayedCancelledFlights;
     }
 
-    public void setMaxDelay(double maxDelay) {
+    private void setMaxDelay(double maxDelay) {
         this.maxDelay = maxDelay;
     }
 
-    public void setPercentDelayedCancelledFlights() {
+    private void setPercentDelayedCancelledFlights() {
         this.percentDelayedCancelledFlights = (double) this.totalDelayedCancelledFlights * 100 / this.totalFlights;
     }
 
-    public void addTotalDelayedCancelledFlights(int addition) {
+    private void addTotalDelayedCancelledFlights(int addition) {
         this.totalDelayedCancelledFlights += addition;
     }
 
-    public void addTotalFlights(int addition) {
+    private void addTotalFlights(int addition) {
         this.totalFlights += addition;
     }
 
