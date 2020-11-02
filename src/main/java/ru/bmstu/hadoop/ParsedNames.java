@@ -15,6 +15,6 @@ public class ParsedNames implements Serializable {
     }
 
     public String getAirportID() {
-        return airportName;
+        return airportID;
     }
 }
