@@ -25,6 +25,6 @@ public class FinalAirportStatistics implements Serializable {
                 destAirportName + ' ' +
                 ": maxDelay = " + maxDelay +
                 "; percentDelayedAndCancelledFlights = " + percentDelayedAndCancelledFlights +
-                ';';
+                "%;";
     }
 }
