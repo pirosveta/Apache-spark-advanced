@@ -6,6 +6,13 @@ public class TotalStatistics implements Serializable {
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights = 0;
 
+    public TotalStatistics(TotalStatistics total) {
+        totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
+        totalFlights = total.getTotalFlights();
+        percentDelayedCancelledFlights = total.getPercentDelayedCancelledFlights();
+        maxDelay = total.getMaxDelay();
+    }
+
     public TotalStatistics(SingleStatistics single) {
         maxDelay = single.getDelay();
         totalFlights = 1;
@@ -57,7 +64,7 @@ public class TotalStatistics implements Serializable {
             total.addTotalDelayedCancelledFlights(1);
         }
         total.setPercentDelayedCancelledFlights();
-        return total;
+        return new TotalStatistics(total);
     }
 
     public static TotalStatistics update(TotalStatistics first, TotalStatistics second) {
@@ -67,6 +74,6 @@ public class TotalStatistics implements Serializable {
         first.addTotalFlights(second.getTotalFlights());
         first.addTotalDelayedCancelledFlights(second.getTotalDelayedCancelledFlights());
         first.setPercentDelayedCancelledFlights();
-        return first;
+        return new TotalStatistics(first);
     }
 }

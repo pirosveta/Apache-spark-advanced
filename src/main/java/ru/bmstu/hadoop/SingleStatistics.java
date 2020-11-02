@@ -9,8 +9,8 @@ public class SingleStatistics implements Serializable {
     public SingleStatistics(String delay, String cancelled) {
         try {
             this.cancelled = Integer.parseInt(cancelled);
-            if (this.cancelled == 0) this.delay = Double.parseDouble(delay);
-            else this.delay = 0;
+            if (this.cancelled == 0.00) this.delay = Double.parseDouble(delay);
+            else this.delay = 0.00;
         }
         catch (NumberFormatException e) {
             System.out.println(e);
