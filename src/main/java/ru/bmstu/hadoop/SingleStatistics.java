@@ -3,8 +3,8 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class SingleStatistics implements Serializable {
-    private double delay;
     private int cancelled;
+    private double delay;
 
     public SingleStatistics(String delay, String cancelled) {
         try {
