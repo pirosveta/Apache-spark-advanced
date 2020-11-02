@@ -39,7 +39,7 @@ public class JoinJob {
         System.out.println("--------TotalStatistics--------\n");
         airportData.take(5).forEach(System.out::println);
         System.out.println("------------------------\n");
-
+        
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).
                 filter(s -> !s.getAirportName().equals("Description"));
