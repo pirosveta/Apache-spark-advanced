@@ -9,7 +9,7 @@ public class TotalStatistics implements Serializable {
     public TotalStatistics(SingleStatistics single) {
         maxDelay = single.getDelay();
         totalFlights = 1;
-        if (single.getDelay() > 0 || single.getCancelled() == 1) {
+        if (single.getDelay() > 0.00 || single.getCancelled() == 1.00) {
             totalDelayedCancelledFlights = 1;
         }
         else totalDelayedCancelledFlights = 0;
@@ -53,7 +53,7 @@ public class TotalStatistics implements Serializable {
             total.setMaxDelay(single.getDelay());
         }
         total.addTotalFlights(1);
-        if (single.getDelay() > 0 || single.getCancelled() == 1) {
+        if (single.getDelay() > 0.00 || single.getCancelled() == 1.00) {
             total.addTotalDelayedCancelledFlights(1);
         }
         total.setPercentDelayedCancelledFlights();
