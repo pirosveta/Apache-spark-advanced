@@ -5,8 +5,7 @@ import scala.Tuple2;
 
 public class FinalAirportStatistics implements Serializable {
     private String originAirportID, originAirportName, destAirportID, destAirportName;
-    private int maxDelay;
-    private double percentDelayedAndCancelledFlights;
+    private double maxDelay, percentDelayedAndCancelledFlights;
 
     public FinalAirportStatistics(Tuple2<String, String> airportID, TotalStatistics statistics,
                                   String originAirportName, String destAirportName) {

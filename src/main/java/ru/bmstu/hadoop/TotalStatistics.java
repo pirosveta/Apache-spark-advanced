@@ -3,8 +3,8 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class TotalStatistics implements Serializable {
-    private int maxDelay, totalDelayedCancelledFlights, totalFlights;
-    private double percentDelayedCancelledFlights = 0;
+    private int totalDelayedCancelledFlights, totalFlights;
+    private double maxDelay, percentDelayedCancelledFlights = 0;
 
     public TotalStatistics(SingleStatistics single) {
         maxDelay = single.getDelay();
@@ -16,7 +16,7 @@ public class TotalStatistics implements Serializable {
         this.setPercentDelayedCancelledFlights();
     }
 
-    public int getMaxDelay() {
+    public double getMaxDelay() {
         return maxDelay;
     }
 
@@ -32,7 +32,7 @@ public class TotalStatistics implements Serializable {
         return percentDelayedCancelledFlights;
     }
 
-    public void setMaxDelay(int maxDelay) {
+    public void setMaxDelay(double maxDelay) {
         this.maxDelay = maxDelay;
     }
 
