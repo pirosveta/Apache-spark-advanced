@@ -19,28 +19,28 @@ public class JoinJob {
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).
                 filter(s -> !s.getCancelled().equals("\"CANCELLED\""));
 
-        System.out.println("--------ParsedData--------\n");
+        System.out.println("--------ParsedData--------");
         parsedTotalData.take(5).forEach(s -> System.out.println(s.getOriginAirportID() + " " + s.getDestAirportID() + " " +
                 s.getDelay() + " " + s.getCancelled()));
-        System.out.println("------------------------\n");
+        System.out.println("------------------------");
 
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
 
-        System.out.println("--------SingleStatistics--------\n");
+        System.out.println("--------SingleStatistics--------");
         orderedTotalData.take(5).forEach(s -> System.out.println(s._2.getDelay() + " " + s._2.getCancelled()));
-        System.out.println("------------------------\n");
+        System.out.println("------------------------");
 
         JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
                 TotalStatistics::new,
                 TotalStatistics::updateStatistics,
                 TotalStatistics::update);
 
-        System.out.println("--------TotalStatistics--------\n");
+        System.out.println("--------TotalStatistics--------");
         airportData.take(5).forEach(s -> System.out.println(s._2.getMaxDelay() + " " + s._2.getTotalFlights() + " " +
                 s._2.getTotalDelayedCancelledFlights() + " " + s._2.getPercentDelayedCancelledFlights()));
-        System.out.println("------------------------\n");
+        System.out.println("------------------------");
 
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(",", 2))).
