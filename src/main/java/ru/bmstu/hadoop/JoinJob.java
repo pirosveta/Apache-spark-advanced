@@ -18,6 +18,9 @@ public class JoinJob {
 
         JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(","))).
                 filter(s -> !s.getCancelled().equals("\"CANCELLED\""));
+        System.out.println("--------ParsedData--------\n");
+        parsedTotalData.take(5).forEach(System.out::println);
+        System.out.println("------------------------");
         JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
