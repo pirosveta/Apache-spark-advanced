@@ -21,7 +21,7 @@ public class SingleStatistics implements Serializable {
         return cancelled;
     }
 
-    public int getDelay() {
+    public double getDelay() {
         return delay;
     }
 }
