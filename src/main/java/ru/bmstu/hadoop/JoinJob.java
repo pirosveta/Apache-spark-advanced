@@ -29,7 +29,8 @@ public class JoinJob {
                 new SingleStatistics(s.getDelay(), s.getCancelled())));
 
         System.out.println("--------SingleStatistics--------\n");
-        orderedTotalData.take(10).forEach(s -> System.out.println(s._2.getDelay() + " " + s._2.getCancelled()));
+        orderedTotalData.take(10).forEach(s -> System.out.println(s._1._1 + " " + s._1._2 + " " +
+                s._2.getDelay() + " " + s._2.getCancelled()));
         System.out.println("------------------------\n");
 
         JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
