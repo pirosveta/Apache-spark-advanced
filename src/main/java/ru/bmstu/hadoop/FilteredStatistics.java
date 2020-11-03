@@ -7,7 +7,7 @@ public class FilteredStatistics implements Serializable {
     private static final double CANCELLED_FLIGHT = 1, NO_DELAY = 0;
 
     private int totalDelayedCancelledFlights, totalFlights;
-    private double maxDelay, percentDelayedCancelledFlights = 0;
+    private double maxDelay, percentDelayedCancelledFlights;
 
     public FilteredStatistics(FilteredStatistics total) {
         totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
