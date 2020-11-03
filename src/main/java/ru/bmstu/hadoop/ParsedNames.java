@@ -3,8 +3,8 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class ParsedNames implements Serializable {
-    private static final String REGEX_FOR_REPLACE = "\"", REPLACE = "";
-    private static final int COLUMN_ID = 0, COLUMN_NAME = 1;
+    private final String REGEX_FOR_REPLACE = "\"", REPLACE = "";
+    private final int COLUMN_ID = 0, COLUMN_NAME = 1;
 
     private String airportID, airportName;
 

@@ -3,7 +3,7 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class SingleStatistics implements Serializable {
-    private static final int NOT_CANCELLED_FLIGHT = 0, NO_DELAY = 0;
+    private final double NOT_CANCELLED_FLIGHT = 0, NO_DELAY = 0;
 
     private double delay, cancelled;
 

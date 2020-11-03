@@ -3,6 +3,8 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class TotalStatistics implements Serializable {
+    private final double CANCELLED_FLIGHT = 1,
+
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights = 0;
 

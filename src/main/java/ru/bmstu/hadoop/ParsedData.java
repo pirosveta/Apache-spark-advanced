@@ -3,7 +3,7 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class ParsedData implements Serializable {
-    private static final int COLUMN_ORIGIN_ID = 11, COLUMN_DEST_ID = 14, COLUMN_DELAY = 18, COLUMN_CANCELLED = 19;
+    private final int COLUMN_ORIGIN_ID = 11, COLUMN_DEST_ID = 14, COLUMN_DELAY = 18, COLUMN_CANCELLED = 19;
 
     private String originAirportID, destAirportID, delay, cancelled;
 
