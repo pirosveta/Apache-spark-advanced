@@ -3,12 +3,12 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 import scala.Tuple2;
 
-public class FinalAirportStatistics implements Serializable {
+public class TotalStatistics implements Serializable {
     private String originAirportID, originAirportName, destAirportID, destAirportName;
     private double maxDelay, percentDelayedAndCancelledFlights;
 
-    public FinalAirportStatistics(Tuple2<String, String> airportID, TotalStatistics statistics,
-                                  String originAirportName, String destAirportName) {
+    public TotalStatistics(Tuple2<String, String> airportID, FilteredStatistics statistics,
+                           String originAirportName, String destAirportName) {
         originAirportID = airportID._1;
         destAirportID = airportID._2;
         this.originAirportName = originAirportName;

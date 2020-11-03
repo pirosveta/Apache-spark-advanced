@@ -9,35 +9,36 @@ import scala.Tuple2;
 
 import java.util.Map;
 
-public class AirportStatisticsApp {
-    private static final String DELIMITER = ",", FIRST_ROW_TOTAL_DATA = "\"CANCELLED\"",
-            FIRST_ROW_AIRPORT_NAMES = "Description";
+public class AirportFlightStatistics {
+    private static final String OUTPUT_FILE = "output", TOTAL_DATA_FILE = "664600583_T_ONTIME_sample.csv",
+            AIRPORT_NAMES_FILE = "L_AIRPORT_ID.csv", DELIMITER = ",", ZERO_ROW_TOTAL_DATA = "\"CANCELLED\"",
+            ZERO_ROW_AIRPORT_NAMES = "Description";
     private static final int NUMBER_OF_ARRAYS = 2;
 
     public static void main(String[] args) {
         SparkConf conf = new SparkConf().setAppName("Airport flight statistics");
         JavaSparkContext sc = new JavaSparkContext(conf);
-        JavaRDD<String> totalData = sc.textFile("664600583_T_ONTIME_sample.csv");
-        JavaRDD<String> airportNames = sc.textFile("L_AIRPORT_ID.csv");
+        JavaRDD<String> flightData = sc.textFile(TOTAL_DATA_FILE);
+        JavaRDD<String> airportNames = sc.textFile(AIRPORT_NAMES_FILE);
 
-        JavaRDD<ParsedData> parsedTotalData = totalData.map(s -> new ParsedData(s.split(DELIMITER))).
-                filter(s -> !s.getCancelled().equals(FIRST_ROW_TOTAL_DATA));
-        JavaPairRDD<Tuple2<String, String>, SingleStatistics> orderedTotalData = parsedTotalData.mapToPair(s ->
+        JavaRDD<ParsedData> parsedFlightData = flightData.map(s -> new ParsedData(s.split(DELIMITER))).
+                filter(s -> !s.getCancelled().equals(ZERO_ROW_TOTAL_DATA));
+        JavaPairRDD<Tuple2<String, String>, Statistics> orderedFlightData = parsedFlightData.mapToPair(s ->
                 new Tuple2<>(new Tuple2<>(s.getOriginAirportID(), s.getDestAirportID()),
-                new SingleStatistics(s.getDelay(), s.getCancelled())));
-        JavaPairRDD<Tuple2<String, String>, TotalStatistics> airportData = orderedTotalData.combineByKey(
-                TotalStatistics::new,
-                TotalStatistics::updateStatistics,
-                TotalStatistics::update);
+                new Statistics(s.getDelay(), s.getCancelled())));
+        JavaPairRDD<Tuple2<String, String>, FilteredStatistics> filteredFlightData = orderedFlightData.combineByKey(
+                FilteredStatistics::new,
+                FilteredStatistics::updateStatistics,
+                FilteredStatistics::update);
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(DELIMITER, NUMBER_OF_ARRAYS))).
-                filter(s -> !s.getAirportName().equals(FIRST_ROW_AIRPORT_NAMES));
-        Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
+                filter(s -> !s.getAirportName().equals(ZERO_ROW_AIRPORT_NAMES));
+        Map<String, String> parsedAirportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
 
-        final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(airportNamesMap);
-        JavaRDD<FinalAirportStatistics> airportStatistics = airportData.map(s -> new FinalAirportStatistics(s._1, s._2,
+        final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(parsedAirportNamesMap);
+        JavaRDD<TotalStatistics> airportStatistics = filteredFlightData.map(s -> new TotalStatistics(s._1, s._2,
                 airportsBroadcasted.value().get(s._1._1), airportsBroadcasted.value().get(s._1._2)));
-        airportStatistics.saveAsTextFile("output");
+        airportStatistics.saveAsTextFile(OUTPUT_FILE);
     }
 }

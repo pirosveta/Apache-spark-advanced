@@ -2,21 +2,21 @@ package ru.bmstu.hadoop;
 
 import scala.Serializable;
 
-public class TotalStatistics implements Serializable {
+public class FilteredStatistics implements Serializable {
     private static final int WAS_FLIGHT = 1, NO_FLIGHT = 0, PERCENT = 100;
     private static final double CANCELLED_FLIGHT = 1, NO_DELAY = 0;
 
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights = 0;
 
-    public TotalStatistics(TotalStatistics total) {
+    public FilteredStatistics(FilteredStatistics total) {
         totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
         totalFlights = total.getTotalFlights();
         percentDelayedCancelledFlights = total.getPercentDelayedCancelledFlights();
         maxDelay = total.getMaxDelay();
     }
 
-    public TotalStatistics(SingleStatistics single) {
+    public FilteredStatistics(Statistics single) {
         maxDelay = single.getDelay();
         totalFlights = WAS_FLIGHT;
         if (single.getDelay() > NO_DELAY || single.getCancelled() == CANCELLED_FLIGHT) {
@@ -58,7 +58,7 @@ public class TotalStatistics implements Serializable {
         this.totalFlights += addition;
     }
 
-    public static TotalStatistics updateStatistics(TotalStatistics total, SingleStatistics single) {
+    public static FilteredStatistics updateStatistics(FilteredStatistics total, Statistics single) {
         if (total.getMaxDelay() < single.getDelay()) {
             total.setMaxDelay(single.getDelay());
         }
@@ -67,16 +67,16 @@ public class TotalStatistics implements Serializable {
             total.addTotalDelayedCancelledFlights(WAS_FLIGHT);
         }
         total.setPercentDelayedCancelledFlights();
-        return new TotalStatistics(total);
+        return new FilteredStatistics(total);
     }
 
-    public static TotalStatistics update(TotalStatistics first, TotalStatistics second) {
+    public static FilteredStatistics update(FilteredStatistics first, FilteredStatistics second) {
         if (first.getMaxDelay() < second.getMaxDelay()) {
             first.setMaxDelay(second.getMaxDelay());
         }
         first.addTotalFlights(second.getTotalFlights());
         first.addTotalDelayedCancelledFlights(second.getTotalDelayedCancelledFlights());
         first.setPercentDelayedCancelledFlights();
-        return new TotalStatistics(first);
+        return new FilteredStatistics(first);
     }
 }
