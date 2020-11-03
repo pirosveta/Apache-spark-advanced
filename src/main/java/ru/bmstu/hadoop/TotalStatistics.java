@@ -23,8 +23,7 @@ public class TotalStatistics implements Serializable {
                 " (" +originAirportName + "), " +
                 "To: " + destAirportID +
                 " (" + destAirportName + ") : " +
-                "maxDelay = " + maxDelay + "; " + 
-                "percentDelayedAndCancelledFlights = " + percentDelayedAndCancelledFlights +
-                "%;";
+                "maxDelay = " + maxDelay + "; " +
+                "percentDelayedAndCancelledFlights = " + percentDelayedAndCancelledFlights + "%;";
     }
 }
