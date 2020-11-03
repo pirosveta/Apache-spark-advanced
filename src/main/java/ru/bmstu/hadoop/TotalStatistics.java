@@ -21,8 +21,8 @@ public class TotalStatistics implements Serializable {
     public String toString() {
         return "From: " + originAirportName +
                 " (" +originAirportID + "), " +
-                "To: " + destAirportID +
-                " (" + destAirportName + ") : " +
+                "To: " + destAirportName +
+                " (" + destAirportID + ") : " +
                 "maxDelay = " + maxDelay + "; " +
                 "percentDelayedAndCancelledFlights = " + percentDelayedAndCancelledFlights + "%;";
     }
