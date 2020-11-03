@@ -9,13 +9,6 @@ public class FilteredStatistics implements Serializable {
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights;
 
-    public FilteredStatistics(FilteredStatistics total) {
-        totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
-        totalFlights = total.getTotalFlights();
-        percentDelayedCancelledFlights = total.getPercentDelayedCancelledFlights();
-        maxDelay = total.getMaxDelay();
-    }
-
     public FilteredStatistics(Statistics single) {
         maxDelay = single.getDelay();
         totalFlights = WAS_FLIGHT;
@@ -24,6 +17,13 @@ public class FilteredStatistics implements Serializable {
         }
         else totalDelayedCancelledFlights = NO_FLIGHT;
         this.setPercentDelayedCancelledFlights();
+    }
+
+    public FilteredStatistics(FilteredStatistics total) {
+        totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
+        totalFlights = total.getTotalFlights();
+        percentDelayedCancelledFlights = total.getPercentDelayedCancelledFlights();
+        maxDelay = total.getMaxDelay();
     }
 
     public double getMaxDelay() {
