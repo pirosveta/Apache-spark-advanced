@@ -9,21 +9,14 @@ public class FilteredStatistics implements Serializable {
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights;
 
-    public FilteredStatistics(Statistics single) {
-        maxDelay = single.getDelay();
+    public FilteredStatistics(Statistics flight) {
+        maxDelay = flight.getDelay();
         totalFlights = WAS_FLIGHT;
-        if (single.getDelay() > NO_DELAY || single.getCancelled() == CANCELLED_FLIGHT) {
+        if (flight.getDelay() > NO_DELAY || flight.getCancelled() == CANCELLED_FLIGHT) {
             totalDelayedCancelledFlights = WAS_FLIGHT;
         }
         else totalDelayedCancelledFlights = NO_FLIGHT;
         this.setPercentDelayedCancelledFlights();
-    }
-
-    public FilteredStatistics(FilteredStatistics total) {
-        totalDelayedCancelledFlights = total.getTotalDelayedCancelledFlights();
-        totalFlights = total.getTotalFlights();
-        percentDelayedCancelledFlights = total.getPercentDelayedCancelledFlights();
-        maxDelay = total.getMaxDelay();
     }
 
     public double getMaxDelay() {
@@ -42,8 +35,8 @@ public class FilteredStatistics implements Serializable {
         return percentDelayedCancelledFlights;
     }
 
-    private void setMaxDelay(double maxDelay) {
-        this.maxDelay = maxDelay;
+    private void setMaxDelay(double delay) {
+        this.maxDelay = delay;
     }
 
     private void setPercentDelayedCancelledFlights() {
@@ -58,16 +51,16 @@ public class FilteredStatistics implements Serializable {
         this.totalFlights += addition;
     }
 
-    public static FilteredStatistics updateStatistics(FilteredStatistics total, Statistics single) {
-        if (total.getMaxDelay() < single.getDelay()) {
-            total.setMaxDelay(single.getDelay());
+    public static FilteredStatistics updateStatistics(FilteredStatistics total, Statistics flight) {
+        if (total.getMaxDelay() < flight.getDelay()) {
+            total.setMaxDelay(flight.getDelay());
         }
         total.addTotalFlights(WAS_FLIGHT);
-        if (single.getDelay() > NO_DELAY || single.getCancelled() == CANCELLED_FLIGHT) {
+        if (flight.getDelay() > NO_DELAY || flight.getCancelled() == CANCELLED_FLIGHT) {
             total.addTotalDelayedCancelledFlights(WAS_FLIGHT);
         }
         total.setPercentDelayedCancelledFlights();
-        return new FilteredStatistics(total);
+        return total;
     }
 
     public static FilteredStatistics update(FilteredStatistics first, FilteredStatistics second) {
@@ -77,6 +70,6 @@ public class FilteredStatistics implements Serializable {
         first.addTotalFlights(second.getTotalFlights());
         first.addTotalDelayedCancelledFlights(second.getTotalDelayedCancelledFlights());
         first.setPercentDelayedCancelledFlights();
-        return new FilteredStatistics(first);
+        return first;
     }
 }
