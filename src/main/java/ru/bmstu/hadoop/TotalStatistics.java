@@ -20,7 +20,7 @@ public class TotalStatistics implements Serializable {
     @Override
     public String toString() {
         return "From: " + originAirportName +
-                " (" +originAirportName + "), " +
+                " (" +originAirportID + "), " +
                 "To: " + destAirportID +
                 " (" + destAirportName + ") : " +
                 "maxDelay = " + maxDelay + "; " +
