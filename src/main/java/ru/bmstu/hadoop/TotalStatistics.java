@@ -19,7 +19,7 @@ public class TotalStatistics implements Serializable {
 
     @Override
     public String toString() {
-        return originAirportID + ' ' +
+        return "From: '" + originAirportID +  +
                 originAirportName + ' ' +
                 "- " + destAirportID + ' ' +
                 destAirportName + ' ' +
