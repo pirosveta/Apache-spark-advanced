@@ -33,12 +33,12 @@ public class AirportFlightStatistics {
 
         JavaRDD<ParsedNames> parsedAirportNames = airportNames.map(s -> new ParsedNames(s.split(DELIMITER, NUMBER_OF_ARRAYS))).
                 filter(s -> !s.getAirportName().equals(ZERO_ROW_AIRPORT_NAMES));
-        Map<String, String> parsedAirportNamesMap = parsedAirportNames.mapToPair(s ->
+        Map<String, String> airportNamesMap = parsedAirportNames.mapToPair(s ->
                 new Tuple2<>(s.getAirportID(), s.getAirportName())).collectAsMap();
 
-        final Broadcast<Map<String, String>> airportsBroadcasted = sc.broadcast(parsedAirportNamesMap);
-        JavaRDD<TotalStatistics> airportStatistics = filteredFlightData.map(s -> new TotalStatistics(s._1, s._2,
-                airportsBroadcasted.value().get(s._1._1), airportsBroadcasted.value().get(s._1._2)));
-        airportStatistics.saveAsTextFile(OUTPUT_FILE);
+        final Broadcast<Map<String, String>> airportNamesBroadcast = sc.broadcast(airportNamesMap);
+        JavaRDD<TotalStatistics> airportFlightStatistics = filteredFlightData.map(s -> new TotalStatistics(s._1, s._2,
+                airportNamesBroadcast.value().get(s._1._1), airportNamesBroadcast.value().get(s._1._2)));
+        airportFlightStatistics.saveAsTextFile(OUTPUT_FILE);
     }
 }
