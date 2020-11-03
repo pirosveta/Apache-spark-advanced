@@ -9,7 +9,7 @@ import scala.Tuple2;
 
 import java.util.Map;
 
-public class JoinJob {
+public class AirportStatisticsApp {
     private static final String DELIMITER = ",", FIRST_ROW_TOTAL_DATA = "\"CANCELLED\"",
             FIRST_ROW_AIRPORT_NAMES = "Description";
     private static final int NUMBER_OF_ARRAYS = 2;
