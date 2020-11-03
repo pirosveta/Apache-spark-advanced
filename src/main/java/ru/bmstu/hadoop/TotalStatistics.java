@@ -3,7 +3,8 @@ package ru.bmstu.hadoop;
 import scala.Serializable;
 
 public class TotalStatistics implements Serializable {
-    private final double CANCELLED_FLIGHT = 1,
+    private static final int WAS_FLIGHT = 1, NO_FLIGHT = 0, PERCENT = 100;
+    private static final double CANCELLED_FLIGHT = 1, NO_DELAY = 0;
 
     private int totalDelayedCancelledFlights, totalFlights;
     private double maxDelay, percentDelayedCancelledFlights = 0;
@@ -17,11 +18,11 @@ public class TotalStatistics implements Serializable {
 
     public TotalStatistics(SingleStatistics single) {
         maxDelay = single.getDelay();
-        totalFlights = 1;
-        if (single.getDelay() > 0 || single.getCancelled() == 1) {
-            totalDelayedCancelledFlights = 1;
+        totalFlights = WAS_FLIGHT;
+        if (single.getDelay() > NO_DELAY || single.getCancelled() == CANCELLED_FLIGHT) {
+            totalDelayedCancelledFlights = WAS_FLIGHT;
         }
-        else totalDelayedCancelledFlights = 0;
+        else totalDelayedCancelledFlights = NO_FLIGHT;
         this.setPercentDelayedCancelledFlights();
     }
 
@@ -46,7 +47,7 @@ public class TotalStatistics implements Serializable {
     }
 
     private void setPercentDelayedCancelledFlights() {
-        this.percentDelayedCancelledFlights = (double) this.totalDelayedCancelledFlights * 100 / this.totalFlights;
+        this.percentDelayedCancelledFlights = (double) this.totalDelayedCancelledFlights * PERCENT / this.totalFlights;
     }
 
     private void addTotalDelayedCancelledFlights(int addition) {
@@ -61,9 +62,9 @@ public class TotalStatistics implements Serializable {
         if (total.getMaxDelay() < single.getDelay()) {
             total.setMaxDelay(single.getDelay());
         }
-        total.addTotalFlights(1);
-        if (single.getDelay() > 0 || single.getCancelled() == 1) {
-            total.addTotalDelayedCancelledFlights(1);
+        total.addTotalFlights(WAS_FLIGHT);
+        if (single.getDelay() > NO_DELAY || single.getCancelled() == CANCELLED_FLIGHT) {
+            total.addTotalDelayedCancelledFlights(WAS_FLIGHT);
         }
         total.setPercentDelayedCancelledFlights();
         return new TotalStatistics(total);
